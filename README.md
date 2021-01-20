@@ -1,2 +1,2 @@
-# cbd-dogs2
+# cbd-dogs
 Created with CodeSandbox

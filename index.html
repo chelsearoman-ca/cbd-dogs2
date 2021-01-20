@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>Calculator</h1>
+      <form>
+        <fieldset>
+          <legend>Why does your pup need CBD?</legend>
+          <select id="cbd-reason">
+            <option> </option>
+            <option value="pain">Pain</option>
+            <option value="sad">Seperation</option>
+          </select>
+        </fieldset>
+        <fieldset>
+          <legend>How much does pup weigh?</legend>
+          <input id="mass" type="number" />
+          <input
+            id="kilograms"
+            name="unit-of-mass"
+            type="radio"
+            checked
+            onClick="convertLbsToKgs()"
+          />
+          <label for="kilograms">kgs</label>
+          <input
+            id="pounds"
+            name="unit-of-mass"
+            type="radio"
+            onclick="convertKgsToLbs()"
+          />
+          <label for="pounds">lbs</label>
+        </fieldset>
+        <button type="button" onClick="calculateDose()">Gimme</button>
+      </form>
+      <div id="dose-calculation"></div>
+    </div>
+
+    <script>
+      const LBS_PER_KG = 2.204;
+      const convertKgsToLbs = () => {
+        const kilograms = parseFloat(
+          document.getElementById("mass").value
+        ).toFixed(2);
+        document.getElementById("mass").value = (
+          kilograms * LBS_PER_KG
+        ).toFixed(2);
+      };
+      const convertLbsToKgs = () => {
+        const pounds = parseFloat(
+          document.getElementById("mass").value
+        ).toFixed(2);
+        document.getElementById("mass").value = (pounds / LBS_PER_KG).toFixed(
+          2
+        );
+      };
+
+      const calculateDose = () => {
+        const reason = document.getElementById("cbd-reason").value;
+        // if reason is empty - validation error that we need to build in later
+        // set variable units-of-mass to either kg or lbs
+        // convert 8kg pain 5ml every 8 hours
+
+        // 0-10 kg = 1 drop
+        // 11-20 kgs = 2 drops
+        // etc.
+
+        // the world is metric, go away us losers
+
+        const massText = document.getElementById("mass").value;
+        const mass = parseInt(massText, 10);
+
+        let dose = Math.floor(mass / 10); // round down, e.g. 5.1 is 5, 5.9 is also 5
+        if (dose < 1) dose = 1;
+
+        document.getElementById(
+          "dose-calculation"
+        ).innerHTML = `You shuld give your pup this much: ${dose} drops!!! 🐕`;
+      };
+    </script>
+  </body>
+</html>
